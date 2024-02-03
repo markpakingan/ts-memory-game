@@ -31,3 +31,8 @@ h1 {
     font-size: 24px;
     cursor: pointer;
   }
+
+  #timer{
+    font-size: 50px;
+    color: red;
+  }

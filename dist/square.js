@@ -6,15 +6,21 @@ const tiles = boardLength * boardWidth;
 const div = document.querySelector("div");
 const colors = ["red", "orange", "yellow"];
 const colorPairs = [...colors, ...colors];
+const startButton = document.querySelector("#start");
 let clickedDiv1 = null;
 let clickedDiv2 = null;
 let divAll;
 let seconds = 0;
+const startGame = () => {
+    createGameBoard();
+    setInterval(updateTimer, 1000);
+};
+startButton.addEventListener("click", startGame);
 //create a time here
 const timerElement = document.querySelector("#timer");
 const updateTimer = () => {
     seconds++;
-    timerElement.textContent = seconds + "seconds";
+    timerElement.textContent = `Time Elapse: ${seconds} seconds`;
 };
 //randomized colors based on colorPairs
 const shuffledArray = (array) => {
@@ -25,6 +31,7 @@ const shuffledArray = (array) => {
     return array;
 };
 const shuffledColors = shuffledArray(colorPairs);
+//creates the gameboard
 const createGameBoard = () => {
     for (let i = 0; i < tiles; i++) {
         let pickedColor = shuffledColors[i];
@@ -36,6 +43,7 @@ const createGameBoard = () => {
         gameboard === null || gameboard === void 0 ? void 0 : gameboard.append(square);
     }
 };
+//if click, it will show the color
 const showColor = (e) => {
     const clickedDiv = e.target;
     const clickedId = clickedDiv.id;
@@ -83,4 +91,3 @@ const matchAllColors = () => {
         }
     }
 };
-createGameBoard();
