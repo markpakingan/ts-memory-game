@@ -3,7 +3,8 @@ const gameboard = document.querySelector("#gameboard");
 const boardLength = 5; 
 const boardWidth = 4; 
 const tiles = boardLength * boardWidth ;
-const div = document.querySelector("div")
+const div = document.querySelector("div");
+const divAll = document.querySelectorAll("div")
 
 const colors = ["red", "orange", "yellow", "green", "blue", "violet", 
 "black", "pink", "purple", "aquamarine"];
@@ -80,6 +81,9 @@ const compareDiv = (div1: HTMLElement, div2: HTMLElement) => {
         clickedDiv1 = null;
         clickedDiv2 = null;
 
+        div1.setAttribute("class", "completed")
+        div2.setAttribute("class", "completed")
+
     } else {
         console.log("try again!");
 
@@ -93,8 +97,19 @@ const compareDiv = (div1: HTMLElement, div2: HTMLElement) => {
         }, 1000)
     }
 
+    matchAllColors();
 }
 
+const matchAllColors = () => {
 
+    for(let div of divAll){
+        if(!div.classList.contains("completed")){
+            console.log("Still waiting");
+        } else {
+            alert("You WIN. Thanks for playing!");
+        }
+    }
+
+}
 
 createGameBoard();
