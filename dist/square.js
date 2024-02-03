@@ -1,12 +1,13 @@
 "use strict";
 const gameboard = document.querySelector("#gameboard");
-const boardLength = 5;
-const boardWidth = 4;
+const boardLength = 3;
+const boardWidth = 3;
 const tiles = boardLength * boardWidth;
 const div = document.querySelector("div");
 const divAll = document.querySelectorAll("div");
-const colors = ["red", "orange", "yellow", "green", "blue", "violet",
-    "black", "pink", "purple", "aquamarine"];
+const colors = ["red", "orange", "yellow"];
+// , "green", "blue", "violet", 
+// "black", "pink", "purple", "aquamarine"
 const colorPairs = [...colors, ...colors];
 let clickedDiv1 = null;
 let clickedDiv2 = null;
@@ -70,10 +71,9 @@ const matchAllColors = () => {
     for (let div of divAll) {
         if (!div.classList.contains("completed")) {
             console.log("Still waiting");
-        }
-        else {
-            alert("You WIN. Thanks for playing!");
+            return;
         }
     }
+    alert("You WIN. Thanks for playing!");
 };
 createGameBoard();

@@ -6,8 +6,10 @@ const tiles = boardLength * boardWidth ;
 const div = document.querySelector("div");
 const divAll = document.querySelectorAll("div")
 
-const colors = ["red", "orange", "yellow", "green", "blue", "violet", 
-"black", "pink", "purple", "aquamarine"];
+const colors = ["red", "orange", "yellow"];
+
+// , "green", "blue", "violet", 
+// "black", "pink", "purple", "aquamarine"
 
 const colorPairs = [...colors, ...colors];
 
@@ -105,10 +107,11 @@ const matchAllColors = () => {
     for(let div of divAll){
         if(!div.classList.contains("completed")){
             console.log("Still waiting");
-        } else {
-            alert("You WIN. Thanks for playing!");
+            return;
         }
     }
+
+    alert("You WIN. Thanks for playing!");
 
 }
 

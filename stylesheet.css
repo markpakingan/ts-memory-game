@@ -5,7 +5,7 @@ h1 {
 
 #gameboard {
     display: grid;
-    grid-template-columns: repeat(5, 100px); /* Adjust the number of columns as needed */
+    grid-template-columns: repeat(3, 100px); /* Adjust the number of columns as needed */
     gap: 10px;
   }
 
