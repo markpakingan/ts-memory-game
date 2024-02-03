@@ -3,9 +3,11 @@ const gameboard = document.querySelector("#gameboard");
 const boardLength = 5;
 const boardWidth = 4;
 const tiles = boardLength * boardWidth;
+const div = document.querySelector("div");
 const colors = ["red", "orange", "yellow", "green", "blue", "violet",
     "black", "pink", "purple", "aquamarine"];
 const colorPairs = [...colors, ...colors];
+//randomized colors based on colorPairs
 const shuffledArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -13,20 +15,26 @@ const shuffledArray = (array) => {
     }
     return array;
 };
-const shuffledColors = shuffledArray(colorPairs, []);
+const shuffledColors = shuffledArray(colorPairs);
 const createGameBoard = () => {
     for (let i = 0; i < tiles; i++) {
         let pickedColor = shuffledColors[i];
         const square = document.createElement("div");
-        const squareId = `square-${pickedColor}`;
-        square.setAttribute("id", squareId);
+        const squareId = pickedColor;
+        square.setAttribute("id", `${squareId}-${i}`);
         square.setAttribute("class", "square");
         square.setAttribute("data-index", i.toString());
         gameboard === null || gameboard === void 0 ? void 0 : gameboard.append(square);
-        square.addEventListener("click", () => handleClick(squareId));
+        // square.addEventListener("click", () => handleClick(squareId))
     }
 };
-const handleClick = (squareId) => {
-    console.log(`You clicked on ${squareId}`);
+const sayHello = (e) => {
+    // const clickedSquare = document.getElementById()!;
+    const clickedDiv = e.target;
+    const clickedId = clickedDiv.id;
+    const squareStyle = clickedDiv.style;
+    squareStyle.backgroundColor = clickedId.split("-")[0];
+    console.log(clickedId.split("-")[0]);
 };
+div === null || div === void 0 ? void 0 : div.addEventListener("click", sayHello);
 createGameBoard();
