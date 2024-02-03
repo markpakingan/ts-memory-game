@@ -1,20 +1,26 @@
 const gameboard = document.querySelector("#gameboard");
 
-const boardLength = 5; 
-const boardWidth = 4; 
+const boardLength = 3; 
+const boardWidth = 2; 
 const tiles = boardLength * boardWidth ;
 const div = document.querySelector("div");
-const divAll = document.querySelectorAll("div")
-
 const colors = ["red", "orange", "yellow"];
-
-// , "green", "blue", "violet", 
-// "black", "pink", "purple", "aquamarine"
-
 const colorPairs = [...colors, ...colors];
 
 let clickedDiv1 : HTMLElement | null = null;
 let clickedDiv2 : HTMLElement | null = null;
+
+let divAll; 
+
+let seconds = 0; 
+
+//create a time here
+const timerElement = document.querySelector("#timer")!;
+
+const updateTimer = () => {
+    seconds++;
+    timerElement.textContent = seconds + "seconds";
+}
 
 
 //randomized colors based on colorPairs
@@ -104,14 +110,16 @@ const compareDiv = (div1: HTMLElement, div2: HTMLElement) => {
 
 const matchAllColors = () => {
 
+    const divAll = document.querySelectorAll("div")
+
     for(let div of divAll){
         if(!div.classList.contains("completed")){
             console.log("Still waiting");
-            return;
+        } else {
+            alert("You WIN. Thanks for playing!");
         }
-    }
+    } 
 
-    alert("You WIN. Thanks for playing!");
 
 }
 

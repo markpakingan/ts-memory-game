@@ -1,16 +1,21 @@
 "use strict";
 const gameboard = document.querySelector("#gameboard");
 const boardLength = 3;
-const boardWidth = 3;
+const boardWidth = 2;
 const tiles = boardLength * boardWidth;
 const div = document.querySelector("div");
-const divAll = document.querySelectorAll("div");
 const colors = ["red", "orange", "yellow"];
-// , "green", "blue", "violet", 
-// "black", "pink", "purple", "aquamarine"
 const colorPairs = [...colors, ...colors];
 let clickedDiv1 = null;
 let clickedDiv2 = null;
+let divAll;
+let seconds = 0;
+//create a time here
+const timerElement = document.querySelector("#timer");
+const updateTimer = () => {
+    seconds++;
+    timerElement.textContent = seconds + "seconds";
+};
 //randomized colors based on colorPairs
 const shuffledArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -68,12 +73,14 @@ const compareDiv = (div1, div2) => {
     matchAllColors();
 };
 const matchAllColors = () => {
+    const divAll = document.querySelectorAll("div");
     for (let div of divAll) {
         if (!div.classList.contains("completed")) {
             console.log("Still waiting");
-            return;
+        }
+        else {
+            alert("You WIN. Thanks for playing!");
         }
     }
-    alert("You WIN. Thanks for playing!");
 };
 createGameBoard();
