@@ -10,6 +10,9 @@ const colors = ["red", "orange", "yellow", "green", "blue", "violet",
 
 const colorPairs = [...colors, ...colors];
 
+let clickedDiv1 : HTMLElement | null = null;
+let clickedDiv2 : HTMLElement | null = null;
+
 
 //randomized colors based on colorPairs
 const shuffledArray = <T>(array: T[]) => {
@@ -36,15 +39,12 @@ const createGameBoard = () => {
         square.setAttribute("class", "square");
 
         square.setAttribute("data-index", i.toString());
-        gameboard?.append(square);
-        // square.addEventListener("click", () => handleClick(squareId))
-        
+        gameboard?.append(square);        
     }
 }
 
 
-const sayHello = (e : MouseEvent) => {
-    // const clickedSquare = document.getElementById()!;
+const showColor = (e : MouseEvent) => {
 
     const clickedDiv = e.target as HTMLElement;
     const clickedId = clickedDiv.id;
@@ -52,10 +52,49 @@ const sayHello = (e : MouseEvent) => {
 
 
     squareStyle.backgroundColor = clickedId.split("-")[0];
-    console.log(clickedId.split("-")[0]);
+    
+    console.log(`You clicked ${clickedId.split("-")[0]}`);
+
+
+    if(!clickedDiv1){
+        clickedDiv1 = clickedDiv;
+    } else {
+        clickedDiv2 = clickedDiv;
+        compareDiv(clickedDiv1, clickedDiv2);
+    }
 }
 
-div?.addEventListener("click", sayHello);
+div?.addEventListener("click", showColor);
+
+
+const compareDiv = (div1: HTMLElement, div2: HTMLElement) => {
+
+    let color1 = div1.style.backgroundColor || "";
+    let color2 = div2.style.backgroundColor || "";
+
+
+    if(color1 === color2){
+
+        console.log("colors matched!");
+
+        clickedDiv1 = null;
+        clickedDiv2 = null;
+
+    } else {
+        console.log("try again!");
+
+        setTimeout(()=> {
+            div1.style.backgroundColor = "";
+            div2.style.backgroundColor = "";
+
+            clickedDiv1 = null;
+            clickedDiv2 = null;
+
+        }, 1000)
+    }
+
+}
+
+
+
 createGameBoard();
-
-
