@@ -11,26 +11,6 @@ let clickedDiv1 = null;
 let clickedDiv2 = null;
 let divAll;
 let seconds = 0;
-const startGame = () => {
-    createGameBoard();
-    setInterval(updateTimer, 1000);
-};
-startButton.addEventListener("click", startGame);
-//create a time here
-const timerElement = document.querySelector("#timer");
-const updateTimer = () => {
-    seconds++;
-    timerElement.textContent = `Time Elapse: ${seconds} seconds`;
-};
-//randomized colors based on colorPairs
-const shuffledArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-};
-const shuffledColors = shuffledArray(colorPairs);
 //creates the gameboard
 const createGameBoard = () => {
     for (let i = 0; i < tiles; i++) {
@@ -42,6 +22,31 @@ const createGameBoard = () => {
         square.setAttribute("data-index", i.toString());
         gameboard === null || gameboard === void 0 ? void 0 : gameboard.append(square);
     }
+};
+//randomized colors based on colorPairs
+const shuffledArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+};
+const shuffledColors = shuffledArray(colorPairs);
+//create a timer
+const timerElement = document.querySelector("#timer");
+const updateTimer = () => {
+    seconds++;
+    timerElement.textContent = `Time Elapse: ${seconds} seconds`;
+};
+const startGame = () => {
+    createGameBoard();
+    toggleClass();
+    setInterval(updateTimer, 1000);
+};
+startButton.addEventListener("click", startGame);
+const toggleClass = () => {
+    const startButton = document.querySelector("#hide-timer");
+    startButton.classList.toggle("#timer");
 };
 //if click, it will show the color
 const showColor = (e) => {
