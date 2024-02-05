@@ -32,7 +32,17 @@ h1 {
     cursor: pointer;
   }
 
-  #timer{
+  .hide-timer{
+    display: none;
     font-size: 50px;
     color: red;
+  }
+
+  .timer{
+    font-size: 50px;
+    color: red;
+  }
+
+  .hide-start{
+    display: none;
   }

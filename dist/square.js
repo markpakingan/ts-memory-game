@@ -7,6 +7,8 @@ const div = document.querySelector("div");
 const colors = ["red", "orange", "yellow"];
 const colorPairs = [...colors, ...colors];
 const startButton = document.querySelector("#start");
+const timerElement = document.querySelector(".hide-timer");
+// let timerInterval: NodeJS.Timeout | null = null;
 let clickedDiv1 = null;
 let clickedDiv2 = null;
 let divAll;
@@ -32,21 +34,20 @@ const shuffledArray = (array) => {
     return array;
 };
 const shuffledColors = shuffledArray(colorPairs);
-//create a timer
-const timerElement = document.querySelector("#timer");
-const updateTimer = () => {
-    seconds++;
-    timerElement.textContent = `Time Elapse: ${seconds} seconds`;
-};
+// const updateTimer = () => {
+//     seconds++;
+//     timerElement.textContent = `Time Elapse: ${seconds} seconds`
+// }
 const startGame = () => {
     createGameBoard();
-    toggleClass();
-    setInterval(updateTimer, 1000);
+    // let timerInterval = setInterval(updateTimer, 1000);
+    hideStartButton();
+    // showTimer();
 };
 startButton.addEventListener("click", startGame);
-const toggleClass = () => {
-    const startButton = document.querySelector("#hide-timer");
-    startButton.classList.toggle("#timer");
+const showTimer = () => {
+    timerElement.classList.remove("hide-timer");
+    timerElement.classList.add("timer");
 };
 //if click, it will show the color
 const showColor = (e) => {
@@ -90,9 +91,12 @@ const matchAllColors = () => {
     for (let div of divAll) {
         if (!div.classList.contains("completed")) {
             console.log("Still waiting");
-        }
-        else {
-            alert("You WIN. Thanks for playing!");
+            return;
         }
     }
+    alert("You WIN. Thanks for playing!");
+};
+const hideStartButton = () => {
+    startButton.classList.remove("start");
+    startButton.classList.add("hide-start");
 };

@@ -7,6 +7,8 @@ const div = document.querySelector("div");
 const colors = ["red", "orange", "yellow"];
 const colorPairs = [...colors, ...colors];
 const startButton = document.querySelector("#start") as HTMLInputElement;
+const timerElement = document.querySelector(".hide-timer")!;
+// let timerInterval: NodeJS.Timeout | null = null;
 
 let clickedDiv1 : HTMLElement | null = null;
 let clickedDiv2 : HTMLElement | null = null;
@@ -47,28 +49,26 @@ const shuffledArray = <T>(array: T[]) => {
 const shuffledColors = shuffledArray(colorPairs)
 
 
-//create a timer
-const timerElement = document.querySelector("#timer")!;
 
-const updateTimer = () => {
-    seconds++;
-    timerElement.textContent = `Time Elapse: ${seconds} seconds`
-}
+// const updateTimer = () => {
+//     seconds++;
+//     timerElement.textContent = `Time Elapse: ${seconds} seconds`
+// }
 
 
 const startGame = () => {
     createGameBoard();
-    toggleClass();
-    setInterval(updateTimer, 1000);
+    // let timerInterval = setInterval(updateTimer, 1000);
+    hideStartButton();
+    // showTimer();
 }
 
 
 startButton.addEventListener("click", startGame);
 
-const toggleClass = () => {
-    const startButton = document.querySelector("#hide-timer") as HTMLInputElement;
-    startButton.classList.toggle("#timer")
-
+const showTimer = () => {
+    timerElement.classList.remove("hide-timer");
+    timerElement.classList.add("timer")
 }
 
 
@@ -92,6 +92,7 @@ const showColor = (e : MouseEvent) => {
         clickedDiv2 = clickedDiv;
         compareDiv(clickedDiv1, clickedDiv2);
     }
+
 }
 
 div?.addEventListener("click", showColor);
@@ -136,12 +137,18 @@ const matchAllColors = () => {
     for(let div of divAll){
         if(!div.classList.contains("completed")){
             console.log("Still waiting");
-        } else {
-            alert("You WIN. Thanks for playing!");
-        }
+            return;
+        } 
     } 
+
+    alert("You WIN. Thanks for playing!");
 
 
 }
 
+
+const hideStartButton = () => {
+    startButton.classList.remove("start");
+    startButton.classList.add("hide-start")
+}
 
