@@ -100,3 +100,7 @@ const hideStartButton = () => {
     startButton.classList.remove("start");
     startButton.classList.add("hide-start");
 };
+
+
+
+// testing
